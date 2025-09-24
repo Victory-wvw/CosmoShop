@@ -601,19 +601,24 @@ body {
 }
 
 /* Пустая корзина */
+/* Абсолютное центрирование по центру экрана */
 .empty-cart {
-    grid-column: 1 / -1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
-    padding: 4rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 400px;
+    width: 100%;
+    padding: 2rem;
+}
+
+.cart-content {
+    position: relative;
+    min-height: 70vh;
 }
 
 .empty-cart p {
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     color: #666;
     margin-bottom: 2rem;
     font-family: 'Playfair Display', serif;
@@ -622,15 +627,17 @@ body {
 .empty-cart .btn {
     background: #D4AF37;
     color: white;
-    padding: 12px 30px;
+    padding: 15px 40px;
     text-decoration: none;
     border-radius: 25px;
     font-weight: 600;
-    transition: background 0.3s;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
 }
 
 .empty-cart .btn:hover {
     background: #b8941f;
+    transform: translateY(-2px);
 }
 
 /* Адаптивность */
