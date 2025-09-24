@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог - CosmoShop</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="header">
@@ -16,7 +17,7 @@
                 <ul>
                     <li><a href="index.html">Главная</a></li>
                     <li><a href="catalog.html">Каталог</a></li>
-                    <li><a href="cart.html">Корзина</a></li>
+                    <li><a href="cart.html">Корзина <span class="cart-counter">0</span></a></li>
                     <li><a href="login.html">Войти</a></li>
                 </ul>
             </nav>
@@ -29,51 +30,42 @@
                 <h2>Каталог товаров</h2>
                 
                 <div class="catalog-content">
-                    <!-- Фильтры -->
                     <aside class="filters">
                         <h3>Фильтры</h3>
                         <div class="filter-group">
                             <h4>Категории</h4>
-                            <label><input type="checkbox"> Декоративная косметика</label>
-                            <label><input type="checkbox"> Уход за кожей</label>
-                            <label><input type="checkbox"> Парфюмерия</label>
-                            <label><input type="checkbox"> Волосы</label>
+                            <label><input type="checkbox" value="decorative"> Декоративная косметика</label>
+                            <label><input type="checkbox" value="skincare"> Уход за кожей</label>
+                            <label><input type="checkbox" value="perfume"> Парфюмерия</label>
+                            <label><input type="checkbox" value="haircare"> Волосы</label>
                         </div>
                         
                         <div class="filter-group">
                             <h4>Цена</h4>
                             <div class="price-range">
-                                <input type="number" placeholder="от 500">
+                                <input type="number" id="minPrice" placeholder="от 500">
                                 <span>-</span>
-                                <input type="number" placeholder="до 5000">
+                                <input type="number" id="maxPrice" placeholder="до 5000">
                             </div>
                         </div>
                         
                         <div class="filter-group">
                             <h4>Бренд</h4>
-                            <label><input type="checkbox"> L'Oreal</label>
-                            <label><input type="checkbox"> Maybelline</label>
-                            <label><input type="checkbox"> NYX</label>
-                            <label><input type="checkbox"> Dior</label>
+                            <label><input type="checkbox" value="L'Oreal"> L'Oreal</label>
+                            <label><input type="checkbox" value="Maybelline"> Maybelline</label>
+                            <label><input type="checkbox" value="Nivea"> Nivea</label>
+                            <label><input type="checkbox" value="Chanel"> Chanel</label>
                         </div>
+
+                        <button class="btn" onclick="CosmoShop.applyFilters()">Применить фильтры</button>
                     </aside>
 
-                    <!-- Сетка товаров -->
                     <div class="products-section">
-                        <div class="products-grid">
-                            <!-- Товары будут генерироваться динамически -->
-                            <div class="product-item">
-                                <div class="product-image">
-                                    <img src="images/product1.jpg" alt="Помада">
-                                </div>
-                                <div class="product-info">
-                                    <h4>Матовое помада "Velvet"</h4>
-                                    <p class="price">1 200 руб.</p>
-                                    <button class="btn-add">В корзину</button>
-                                </div>
-                            </div>
-                            
-                            <!-- Добавьте еще 11 товаров для сетки 3x4 -->
+                        <div class="search-box">
+                            <input type="text" id="searchInput" placeholder="Поиск товаров..." class="search-input">
+                        </div>
+                        <div class="products-grid" id="productsGrid">
+                            <!-- Товары загружаются через JavaScript -->
                         </div>
                     </div>
                 </div>
@@ -86,5 +78,7 @@
             <p>&copy; 2024 CosmoShop. Все права защищены.</p>
         </div>
     </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
