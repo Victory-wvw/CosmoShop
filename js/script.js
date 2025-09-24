@@ -185,8 +185,8 @@ const CosmoShop = {
             return;
         }
 
-        // Берем первые 6 товаров для главной
-        const featuredProducts = this.products.slice(0, 6);
+        // Берем первые 4 товара для главной
+        const featuredProducts = this.products.slice(0, 4);
         
         featuredGrid.innerHTML = featuredProducts.map(product => `
             <div class="product-item" onclick="CosmoShop.openProduct(${product.id})">
