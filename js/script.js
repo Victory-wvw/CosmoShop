@@ -186,35 +186,57 @@ const CosmoShop = {
         `).join('');
     },
 
-    addToCart: function(productId) {
-        const product = this.products.find(p => p.id === productId);
-        const existingItem = this.cart.find(item => item.id === productId);
-        
-        if (existingItem) {
-            existingItem.quantity += this.currentQuantity;
+    addToCart: function(productId, quantity = this.currentQuantity) {
+    const product = this.products.find(p => p.id === productId);
+    const existingItem = this.cart.find(item => item.id === productId);
+    
+    if (existingItem) {
+        existingItem.quantity += quantity;
+    } else {
+        this.cart.push({
+            ...product,
+            quantity: quantity
+        });
+    }
+    
+    this.currentQuantity = 1;
+    this.saveCart();
+    this.updateCartCounter();
+    this.showNotification('Товар добавлен в корзину!');
+    
+    if (window.location.pathname.includes('cart.html') || 
+        window.location.pathname.includes('cart')) {
+        this.renderCart();
+    }
+    
+    // Обновляем количество на странице товара
+    const qtyElement = document.querySelector('.qty-value');
+    if (qtyElement) {
+        qtyElement.textContent = '1';
+    }
+},
+
+    updateCartQuantity: function(productId, change) {
+    const item = this.cart.find(item => item.id === productId);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            this.removeFromCart(productId);
         } else {
-            this.cart.push({
-                ...product,
-                quantity: this.currentQuantity
-            });
+            this.saveCart();
+            this.renderCart(); // ОБНОВЛЯЕМ СРАЗУ
+            this.updateCartCounter(); // ОБНОВЛЯЕМ СЧЕТЧИК
         }
-        
-        this.currentQuantity = 1;
-        this.saveCart();
-        this.updateCartCounter();
-        this.showNotification('Товар добавлен в корзину!');
-        
-        if (window.location.pathname.includes('cart.html')) {
-            this.renderCart();
-        }
-    },
+    }
+},
 
     removeFromCart: function(productId) {
-        this.cart = this.cart.filter(item => item.id !== productId);
-        this.saveCart();
-        this.renderCart();
-        this.updateCartCounter();
-    },
+    this.cart = this.cart.filter(item => item.id !== productId);
+    this.saveCart();
+    this.renderCart(); // ОБНОВЛЯЕМ СРАЗУ
+    this.updateCartCounter(); // ОБНОВЛЯЕМ СЧЕТЧИК
+    this.showNotification('Товар удален из корзины');
+},
 
     updateCartQuantity: function(productId, change) {
         const item = this.cart.find(item => item.id === productId);
