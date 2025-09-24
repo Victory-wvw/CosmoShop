@@ -25,7 +25,7 @@ const CosmoShop = {
             brand: 'Nivea',
             price: 1500,
             category: 'skincare',
-            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Крем',
+            image: 'images/product3.jpg',
             description: 'Ежедневный уход за кожей. Глубоко увлажняет и питает кожу, восстанавливает защитный барьер.'
         },
         {
@@ -34,17 +34,17 @@ const CosmoShop = {
             brand: 'Chanel',
             price: 4500,
             category: 'perfume',
-            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Духи',
+            image: 'images/product4.jpg',
             description: 'Утонченный аромат с нотками жасмина, розы и ванили. Стойкость до 8 часов.'
         },
         {
             id: 5,
-            name: 'Шампунь для объема волос',
+            name: 'Шампунь для кудрявых волос',
             brand: 'L\'Oreal',
             price: 750,
             category: 'haircare',
-            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Шампунь',
-            description: 'Шампунь для придания объема тонким волосам. Обогащен протеинами и витаминами.'
+            image: 'images/product5.jpg',
+            description: 'Профессиональный очищающий шампунь Curl Expression для всех типов кудрявых волос.'
         },
         {
             id: 6,
@@ -52,7 +52,7 @@ const CosmoShop = {
             brand: 'Maybelline',
             price: 1300,
             category: 'decorative',
-            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Тональный',
+            image: 'images/product6.jpg',
             description: 'Легкий тональный крем с естественным покрытием. Не забивает поры, подстраивается под тон кожи.'
         },
         {
@@ -61,7 +61,7 @@ const CosmoShop = {
             brand: 'NYX',
             price: 1800,
             category: 'decorative',
-            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Тени',
+            image: 'images/product7.jpg',
             description: 'Палетка из 12 стойких оттенков. Подходит для создания дневного и вечернего макияжа.'
         },
         {
@@ -70,7 +70,7 @@ const CosmoShop = {
             brand: 'La Roche-Posay',
             price: 950,
             category: 'skincare',
-            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Гель',
+            image: 'images/product8.jpg',
             description: 'Мягкий гель для ежедневного умывания. Подходит для чувствительной кожи.'
         }
     ],
