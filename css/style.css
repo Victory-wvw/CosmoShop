@@ -921,3 +921,22 @@ body {
 .product-gallery .main-image img {
     object-fit: contain !important;
 }
+
+/* Стили для авторизованного пользователя */
+.nav .user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #D4AF37;
+    font-weight: 600;
+}
+
+.nav .user-info:hover {
+    color: #b8941f;
+}
+
+.nav .logout-btn {
+    font-size: 0.8em;
+    opacity: 0.7;
+    font-weight: normal;
+}
