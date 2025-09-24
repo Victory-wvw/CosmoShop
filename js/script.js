@@ -41,7 +41,7 @@ const CosmoShop = {
             id: 5,
             name: 'Шампунь для кудрявых волос',
             brand: 'L\'Oreal',
-            price: 750,
+            price: 1750,
             category: 'haircare',
             image: 'images/product5.jpg',
             description: 'Профессиональный очищающий шампунь Curl Expression для всех типов кудрявых волос.'
@@ -50,7 +50,7 @@ const CosmoShop = {
             id: 6,
             name: 'Тональный крем',
             brand: 'Maybelline',
-            price: 1300,
+            price: 400,
             category: 'decorative',
             image: 'images/product6.jpg',
             description: 'Легкий тональный крем с естественным покрытием. Не забивает поры, подстраивается под тон кожи.'
@@ -59,16 +59,16 @@ const CosmoShop = {
             id: 7,
             name: 'Палетка теней для век',
             brand: 'NYX',
-            price: 1800,
+            price: 800,
             category: 'decorative',
             image: 'images/product7.jpg',
-            description: 'Палетка из 12 стойких оттенков. Подходит для создания дневного и вечернего макияжа.'
+            description: 'Палетка из 16 стойких оттенков. Подходит для создания дневного и вечернего макияжа.'
         },
         {
             id: 8,
             name: 'Гель для умывания',
             brand: 'La Roche-Posay',
-            price: 950,
+            price: 2250,
             category: 'skincare',
             image: 'images/product8.jpg',
             description: 'Мягкий гель для ежедневного умывания. Подходит для чувствительной кожи.'
