@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CosmoShop - Интернет-магазин косметики</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="header">
@@ -16,7 +17,7 @@
                 <ul>
                     <li><a href="index.html">Главная</a></li>
                     <li><a href="catalog.html">Каталог</a></li>
-                    <li><a href="cart.html">Корзина</a></li>
+                    <li><a href="cart.html">Корзина <span class="cart-counter">0</span></a></li>
                     <li><a href="login.html">Войти</a></li>
                 </ul>
             </nav>
@@ -35,31 +36,8 @@
         <section class="featured-products">
             <div class="container">
                 <h3>Хиты продаж</h3>
-                <div class="products-grid">
-                    <!-- Товары с абсолютным позиционированием -->
-                    <div class="product-item">
-                        <div class="product-image">
-                            <img src="images/product1.jpg" alt="Помада">
-                            <span class="badge">Хит</span>
-                        </div>
-                        <div class="product-info">
-                            <h4>Матовое помада</h4>
-                            <p class="price">1 200 руб.</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <div class="product-image">
-                            <img src="images/product2.jpg" alt="Тушь">
-                            <span class="badge">Новинка</span>
-                        </div>
-                        <div class="product-info">
-                            <h4>Объемная тушь</h4>
-                            <p class="price">890 руб.</p>
-                        </div>
-                    </div>
-
-                    <!-- Добавьте еще 3-4 товара -->
+                <div class="products-grid" id="featuredProducts">
+                    <!-- Товары загружаются через JavaScript -->
                 </div>
             </div>
         </section>
@@ -70,5 +48,7 @@
             <p>&copy; 2024 CosmoShop. Все права защищены.</p>
         </div>
     </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
