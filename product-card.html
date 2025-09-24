@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Матовое помада - CosmoShop</title>
+    <title>Товар - CosmoShop</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="header">
@@ -16,7 +17,7 @@
                 <ul>
                     <li><a href="index.html">Главная</a></li>
                     <li><a href="catalog.html">Каталог</a></li>
-                    <li><a href="cart.html">Корзина</a></li>
+                    <li><a href="cart.html">Корзина <span class="cart-counter">0</span></a></li>
                     <li><a href="login.html">Войти</a></li>
                 </ul>
             </nav>
@@ -26,45 +27,8 @@
     <main class="main">
         <section class="product-detail">
             <div class="container">
-                <div class="product-detail-content">
-                    <!-- Изображения товара -->
-                    <div class="product-gallery">
-                        <div class="main-image">
-                            <img src="images/product1-large.jpg" alt="Помада">
-                        </div>
-                    </div>
-
-                    <!-- Информация о товаре -->
-                    <div class="product-info-detail">
-                        <h2>Матовое помада "Velvet"</h2>
-                        <p class="product-brand">L'Oreal</p>
-                        <p class="price">1 200 руб.</p>
-                        
-                        <div class="product-options">
-                            <div class="option">
-                                <label>Цвет:</label>
-                                <select>
-                                    <option>Красный</option>
-                                    <option>Розовый</option>
-                                    <option>Нюд</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="product-actions">
-                            <div class="quantity">
-                                <button class="qty-btn">-</button>
-                                <span class="qty-value">1</span>
-                                <button class="qty-btn">+</button>
-                            </div>
-                            <button class="btn-add-to-cart">Добавить в корзину</button>
-                        </div>
-
-                        <div class="product-description">
-                            <h3>Описание</h3>
-                            <p>Матовое помада с насыщенным цветом и длительным сроком носки. Не сушит губы, обеспечивает комфортное нанесение.</p>
-                        </div>
-                    </div>
+                <div class="product-detail-content" id="productDetail">
+                    <div class="loading">Загрузка товара...</div>
                 </div>
             </div>
         </section>
@@ -75,5 +39,7 @@
             <p>&copy; 2024 CosmoShop. Все права защищены.</p>
         </div>
     </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
