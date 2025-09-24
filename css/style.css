@@ -381,7 +381,7 @@ body {
 
 /* Cart styles */
 .cart {
-    padding: 100px 0 50px;
+    padding: 20px 0 50px;
     margin-top: 60px;
     min-height: calc(100vh - 200px);
 }
