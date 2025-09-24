@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог - CosmoShop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>CosmoShop</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="cart.html">Корзина</a></li>
+                    <li><a href="login.html">Войти</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="catalog">
+            <div class="container">
+                <h2>Каталог товаров</h2>
+                
+                <div class="catalog-content">
+                    <!-- Фильтры -->
+                    <aside class="filters">
+                        <h3>Фильтры</h3>
+                        <div class="filter-group">
+                            <h4>Категории</h4>
+                            <label><input type="checkbox"> Декоративная косметика</label>
+                            <label><input type="checkbox"> Уход за кожей</label>
+                            <label><input type="checkbox"> Парфюмерия</label>
+                            <label><input type="checkbox"> Волосы</label>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4>Цена</h4>
+                            <div class="price-range">
+                                <input type="number" placeholder="от 500">
+                                <span>-</span>
+                                <input type="number" placeholder="до 5000">
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4>Бренд</h4>
+                            <label><input type="checkbox"> L'Oreal</label>
+                            <label><input type="checkbox"> Maybelline</label>
+                            <label><input type="checkbox"> NYX</label>
+                            <label><input type="checkbox"> Dior</label>
+                        </div>
+                    </aside>
+
+                    <!-- Сетка товаров -->
+                    <div class="products-section">
+                        <div class="products-grid">
+                            <!-- Товары будут генерироваться динамически -->
+                            <div class="product-item">
+                                <div class="product-image">
+                                    <img src="images/product1.jpg" alt="Помада">
+                                </div>
+                                <div class="product-info">
+                                    <h4>Матовое помада "Velvet"</h4>
+                                    <p class="price">1 200 руб.</p>
+                                    <button class="btn-add">В корзину</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Добавьте еще 11 товаров для сетки 3x4 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CosmoShop. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>

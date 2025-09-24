@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - CosmoShop</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .admin-container { max-width: 1400px; }
+        .admin-header { background: #2c3e50; color: white; padding: 1rem; }
+        .admin-nav { display: flex; gap: 2rem; margin-top: 1rem; }
+        .admin-nav a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 3px; }
+        .admin-nav a.active { background: #34495e; }
+        .admin-content { padding: 2rem 0; }
+        .table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .table th, .table td { padding: 1rem; text-align: left; border-bottom: 1px solid #ddd; }
+        .table th { background: #f8f9fa; }
+        .btn-edit, .btn-delete { padding: 5px 10px; margin: 0 2px; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        .form-group input, .form-group textarea, .form-group select { 
+            width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>Админ-панель CosmoShop</h1>
+            <nav class="admin-nav">
+                <a href="#products" class="active">Товары</a>
+                <a href="#orders">Заказы</a>
+                <a href="#categories">Категории</a>
+                <a href="../index.html">На сайт</a>
+            </nav>
+        </header>
+
+        <main class="admin-content">
+            <!-- Управление товарами -->
+            <section id="products">
+                <h2>Управление товарами</h2>
+                <button class="btn" onclick="showProductForm()">Добавить товар</button>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Изображение</th>
+                            <th>Название</th>
+                            <th>Цена</th>
+                            <th>Категория</th>
+                            <th>Остаток</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTable">
+                        <!-- Данные будут загружены через JS -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Управление заказами -->
+            <section id="orders" style="display: none;">
+                <h2>Управление заказами</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID заказа</th>
+                            <th>Пользователь</th>
+                            <th>Сумма</th>
+                            <th>Статус</th>
+                            <th>Дата</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTable">
+                        <!-- Данные будут загружены через JS -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <!-- Модальное окно для добавления/редактирования товара -->
+    <div id="productModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);">
+        <div style="background: white; margin: 5% auto; padding: 2rem; width: 600px; border-radius: 10px;">
+            <h3 id="modalTitle">Добавить товар</h3>
+            <form id="productForm">
+                <div class="form-group">
+                    <label>Название:</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Описание:</label>
+                    <textarea name="description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Цена:</label>
+                    <input type="number" name="price" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Бренд:</label>
+                    <input type="text" name="brand">
+                </div>
+                <div class="form-group">
+                    <label>Категория:</label>
+                    <select name="category_id" required>
+                        <option value="">Выберите категорию</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Количество на складе:</label>
+                    <input type="number" name="stock_quantity" value="0">
+                </div>
+                <div class="form-group">
+                    <label>URL изображения:</label>
+                    <input type="text" name="image_url">
+                </div>
+                <div style="margin-top: 2rem;">
+                    <button type="submit" class="btn">Сохранить</button>
+                    <button type="button" class="btn" onclick="hideProductForm()">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>

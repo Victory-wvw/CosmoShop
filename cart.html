@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина - CosmoShop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>CosmoShop</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="cart.html">Корзина</a></li>
+                    <li><a href="login.html">Войти</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="cart">
+            <div class="container">
+                <h2>Корзина покупок</h2>
+                
+                <div class="cart-content">
+                    <div class="cart-items">
+                        <!-- Товары в корзине -->
+                        <div class="cart-item">
+                            <div class="item-image">
+                                <img src="images/product1.jpg" alt="Помада">
+                            </div>
+                            <div class="item-info">
+                                <h4>Матовое помада "Velvet"</h4>
+                                <p>Цвет: Красный</p>
+                            </div>
+                            <div class="item-price">1 200 руб.</div>
+                            <div class="item-quantity">
+                                <button class="qty-btn">-</button>
+                                <span class="qty-value">1</span>
+                                <button class="qty-btn">+</button>
+                            </div>
+                            <div class="item-total">1 200 руб.</div>
+                            <button class="btn-remove">×</button>
+                        </div>
+                    </div>
+
+                    <!-- Итоговая сумма -->
+                    <div class="cart-summary">
+                        <h3>Итого</h3>
+                        <div class="summary-row">
+                            <span>Товары (1):</span>
+                            <span>1 200 руб.</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Доставка:</span>
+                            <span>300 руб.</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Всего:</span>
+                            <span>1 500 руб.</span>
+                        </div>
+                        <button class="btn-checkout">Оформить заказ</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CosmoShop. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,512 @@
+/* Reset стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 20px;
+}
+
+.logo h1 {
+    color: #D4AF37;
+    font-family: 'Playfair Display', serif;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.nav a:hover {
+    color: #D4AF37;
+}
+
+/* Hero section */
+.hero {
+    background: linear-gradient(135deg, #FFE8E8 0%, #ffffff 100%);
+    padding: 150px 0 100px;
+    text-align: center;
+}
+
+.hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+.btn {
+    display: inline-block;
+    background: #D4AF37;
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #b8941f;
+}
+
+/* Featured products */
+.featured-products {
+    padding: 80px 0;
+}
+
+.featured-products h3 {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #333;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.product-item {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+.product-image {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.product-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Абсолютное позиционирование для бейджей */
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #D4AF37;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.product-info h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.price {
+    font-weight: 600;
+    color: #D4AF37;
+    font-size: 1.2rem;
+}
+
+/* Footer */
+.footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav ul {
+        gap: 1rem;
+    }
+    
+    .hero {
+        padding: 120px 0 80px;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Стили для каталога */
+.catalog {
+    padding: 100px 0 50px;
+}
+
+.catalog h2 {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.catalog-content {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+}
+
+.filters {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 10px;
+    height: fit-content;
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group h4 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.price-range {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.price-range input {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+/* Стили для карточки товара */
+.product-detail {
+    padding: 100px 0 50px;
+}
+
+.product-detail-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.product-gallery img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.product-info-detail h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-brand {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.product-options {
+    margin: 1.5rem 0;
+}
+
+.option label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.option select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.product-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.qty-btn {
+    padding: 8px 12px;
+    background: #f5f5f5;
+    border: none;
+    cursor: pointer;
+}
+
+.qty-value {
+    padding: 0 15px;
+}
+
+.btn-add-to-cart {
+    background: #D4AF37;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Стили для корзины */
+.cart {
+    padding: 100px 0 50px;
+}
+
+.cart-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 100px 2fr 1fr 1fr 1fr 50px;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.item-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cart-summary {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 10px;
+    height: fit-content;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.summary-row.total {
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
+}
+
+.btn-checkout {
+    width: 100%;
+    background: #D4AF37;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+/* Стили для авторизации */
+.auth {
+    padding: 100px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.auth-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    width: 400px;
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.btn-login, .btn-register {
+    width: 100%;
+    background: #D4AF37;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.auth-links a {
+    color: #D4AF37;
+    text-decoration: none;
+}
+
+/* Адаптивность для каталога */
+@media (max-width: 968px) {
+    .catalog-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .filters {
+        order: 2;
+    }
+    
+    .products-section {
+        order: 1;
+    }
+    
+    .product-detail-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .cart-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .cart-item {
+        grid-template-columns: 80px 1fr;
+        gap: 0.5rem;
+    }
+    
+    .item-price, .item-quantity, .item-total {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Дополнительные стили для ЛР2 */
+.cart-counter {
+    background: #D4AF37;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    margin-left: 5px;
+}
+
+.notification {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+.search-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    width: 300px;
+    margin-bottom: 2rem;
+}
+
+.btn-add {
+    background: #D4AF37;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.btn-add:hover {
+    background: #b8941f;
+}
