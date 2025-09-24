@@ -579,7 +579,7 @@ body {
     background: #333;
     color: white;
     text-align: center;
-    padding: 2rem 0;
+    padding: 1rem 0;
     margin-top: auto; /* Важно! Это прижимает footer к низу */
     flex-shrink: 0; /* Не позволяет footer сжиматься */
     width: 100%;
@@ -692,10 +692,10 @@ body {
     }
     
     .footer {
-        padding: 1.5rem 0;
+        padding: 1.2rem 0;
     }
     
     .footer p {
-        font-size: 0.9rem;
+        font-size: 0.7rem;
     }
 }
