@@ -3,12 +3,12 @@ const CosmoShop = {
     products: [
         {
             id: 1,
-            name: 'Матовое помада "Velvet"',
+            name: 'Матовая помада "Velvet"',
             brand: 'L\'Oreal',
             price: 1200,
             category: 'decorative',
-            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Помада',
-            description: 'Матовое помада с насыщенным цветом и длительным сроком носки. Не сушит губы, обеспечивает комфортное нанесение.'
+            image: 'images/product1.jpg',
+            description: 'Матовая помада с насыщенным цветом и длительным сроком носки. Не сушит губы, обеспечивает комфортное нанесение.'
         },
         {
             id: 2,
@@ -16,7 +16,7 @@ const CosmoShop = {
             brand: 'Maybelline',
             price: 890,
             category: 'decorative',
-            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Тушь',
+            image: 'images/product2.jpg',
             description: 'Тушь для создания объема и длины ресниц. Специальная щеточка предотвращает образование комочков.'
         },
         {
