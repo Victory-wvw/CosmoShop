@@ -12,7 +12,7 @@ const CosmoShop = {
         },
         {
             id: 2,
-            name: 'Объемная тушь для ресниц',
+            name: 'Тушь для ресниц Веерный объём',
             brand: 'Maybelline',
             price: 890,
             category: 'decorative',
