@@ -61,6 +61,6 @@ INSERT INTO categories (name, slug) VALUES
 ('Волосы', 'haircare');
 
 INSERT INTO products (name, description, price, brand, category_id, image_url, stock_quantity) VALUES 
-('Матовое помада "Velvet"', 'Матовое помада с насыщенным цветом', 1200.00, 'L\'Oreal', 1, 'images/product1.jpg', 50),
-('Объемная тушь для ресниц', 'Тушь для создания объема', 890.00, 'Maybelline', 1, 'images/product2.jpg', 30),
+('Матовая помада "Velvet"', 'Матовая помада с насыщенным цветом', 1200.00, 'L\'Oreal', 1, 'images/product1.jpg', 50),
+('Тушь для ресниц Веерный объём', 'Тушь для создания объема', 890.00, 'Maybelline', 1, 'images/product2.jpg', 30),
 ('Увлажняющий крем для лица', 'Ежедневный уход за кожей', 1500.00, 'Nivea', 2, 'images/product3.jpg', 25);
