@@ -134,13 +134,13 @@ const CosmoShop = {
     },
 
     changeQuantity: function(change) {
-        this.currentQuantity += change;
-        if (this.currentQuantity < 1) this.currentQuantity = 1;
-        const qtyElement = document.querySelector('.qty-value');
-        if (qtyElement) {
-            qtyElement.textContent = this.currentQuantity;
-        }
-    },
+    this.currentQuantity += change;
+    if (this.currentQuantity < 1) this.currentQuantity = 1;
+    const qtyElement = document.querySelector('.qty-value');
+    if (qtyElement) {
+        qtyElement.textContent = this.currentQuantity;
+    }
+},
 
     renderFeaturedProducts: function() {
         const featuredGrid = document.getElementById('featuredProducts');
@@ -251,51 +251,45 @@ const CosmoShop = {
         }
     },
 
-    renderCart: function() {
-        const cartItems = document.getElementById('cartItems');
-        const cartSummary = document.getElementById('cartSummary');
-        const emptyCart = document.getElementById('emptyCart');
-        
-        if (!cartItems) return;
+renderCart: function() {
+    const cartItems = document.getElementById('cartItems');
+    const cartSummary = document.getElementById('cartSummary');
+    const emptyCart = document.getElementById('emptyCart');
+    
+    if (!cartItems) return;
 
-        if (this.cart.length === 0) {
-            emptyCart.style.display = 'block';
-            cartSummary.style.display = 'none';
-            cartItems.innerHTML = '<div class="empty-cart"><p>Ваша корзина пуста</p><a href="catalog.html" class="btn">Перейти к покупкам</a></div>';
-            return;
-        }
+    if (this.cart.length === 0) {
+        if (emptyCart) emptyCart.style.display = 'block';
+        if (cartSummary) cartSummary.style.display = 'none';
+        cartItems.innerHTML = '<div class="empty-cart"><p>Ваша корзина пуста</p><a href="catalog.html" class="btn">Перейти к покупкам</a></div>';
+        return;
+    }
 
-        emptyCart.style.display = 'none';
-        cartSummary.style.display = 'block';
+    if (emptyCart) emptyCart.style.display = 'none';
+    if (cartSummary) cartSummary.style.display = 'block';
 
-        cartItems.innerHTML = this.cart.map(item => `
-            <div class="cart-item">
-                <div class="item-image">
-                    <img src="${item.image}" alt="${item.name}">
-                </div>
-                <div class="item-info">
-                    <h4>${item.name}</h4>
-                    <p>${item.brand}</p>
-                </div>
-                <div class="item-price">${item.price} руб.</div>
-                <div class="item-quantity">
-                    <button class="qty-btn" onclick="CosmoShop.updateCartQuantity(${item.id}, -1)">-</button>
-                    <span class="qty-value">${item.quantity}</span>
-                    <button class="qty-btn" onclick="CosmoShop.updateCartQuantity(${item.id}, 1)">+</button>
-                </div>
-                <div class="item-total">${item.price * item.quantity} руб.</div>
-                <button class="btn-remove" onclick="CosmoShop.removeFromCart(${item.id})">×</button>
+    cartItems.innerHTML = this.cart.map(item => `
+        <div class="cart-item">
+            <div class="item-image">
+                <img src="${item.image}" alt="${item.name}">
             </div>
-        `).join('');
+            <div class="item-info">
+                <h4>${item.name}</h4>
+                <p>${item.brand}</p>
+            </div>
+            <div class="item-price">${item.price} руб.</div>
+            <div class="item-quantity">
+                <button class="qty-btn" onclick="CosmoShop.updateCartQuantity(${item.id}, -1)">-</button>
+                <span class="qty-value">${item.quantity}</span>
+                <button class="qty-btn" onclick="CosmoShop.updateCartQuantity(${item.id}, 1)">+</button>
+            </div>
+            <div class="item-total">${item.price * item.quantity} руб.</div>
+            <button class="btn-remove" onclick="CosmoShop.removeFromCart(${item.id})">×</button>
+        </div>
+    `).join('');
 
-        const itemsTotal = this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const deliveryCost = itemsTotal > 2000 ? 0 : 300;
-        const totalAmount = itemsTotal + deliveryCost;
-
-        document.getElementById('itemsTotal').textContent = `${itemsTotal} руб.`;
-        document.getElementById('deliveryCost').textContent = deliveryCost === 0 ? 'Бесплатно' : `${deliveryCost} руб.`;
-        document.getElementById('totalAmount').textContent = `${totalAmount} руб.`;
-    },
+    this.updateCartTotal(); // ОБНОВЛЯЕМ СУММУ
+},
 
     setupEventListeners: function() {
         const searchInput = document.getElementById('searchInput');
@@ -410,23 +404,23 @@ const CosmoShop = {
     },
 
     checkout: function() {
-        if (this.cart.length === 0) {
-            this.showNotification('Корзина пуста!');
-            return;
-        }
-        
-        if (!this.currentUser) {
-            this.showNotification('Пожалуйста, войдите в систему');
-            setTimeout(() => window.location.href = 'login.html', 1000);
-            return;
-        }
-        
-        this.showNotification('Заказ оформлен! Спасибо за покупку!');
-        this.cart = [];
-        this.saveCart();
-        this.renderCart();
-        this.updateCartCounter();
-    },
+    if (this.cart.length === 0) {
+        this.showNotification('Корзина пуста!');
+        return;
+    }
+    
+    if (!this.currentUser) {
+        this.showNotification('Пожалуйста, войдите в систему');
+        setTimeout(() => window.location.href = 'login.html', 1000);
+        return;
+    }
+    
+    this.showNotification('Заказ оформлен! Спасибо за покупку!');
+    this.cart = [];
+    this.saveCart();
+    this.renderCart(); // ОБНОВЛЯЕМ КОРЗИНУ СРАЗУ
+    this.updateCartCounter();
+},
 
     saveCart: function() {
         localStorage.setItem('cart', JSON.stringify(this.cart));
@@ -462,6 +456,18 @@ const CosmoShop = {
         setTimeout(() => notification.remove(), 3000);
     }
 };
+
+updateCartTotal: function() {
+    const itemsTotal = this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const deliveryCost = itemsTotal > 2000 ? 0 : 300;
+    const totalAmount = itemsTotal + deliveryCost;
+
+    if (document.getElementById('itemsTotal')) {
+        document.getElementById('itemsTotal').textContent = `${itemsTotal} руб.`;
+        document.getElementById('deliveryCost').textContent = deliveryCost === 0 ? 'Бесплатно' : `${deliveryCost} руб.`;
+        document.getElementById('totalAmount').textContent = `${totalAmount} руб.`;
+    }
+},
 
 document.addEventListener('DOMContentLoaded', function() {
     CosmoShop.init();
