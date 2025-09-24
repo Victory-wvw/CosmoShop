@@ -130,13 +130,103 @@ const CosmoShop = {
     },
 
     // Загрузка данных пользователя
-    loadUser: function() {
-        const savedUser = localStorage.getItem('cosmoshop_user');
-        if (savedUser) {
-            this.currentUser = JSON.parse(savedUser);
-            console.log('User loaded:', this.currentUser);
+    // Загрузка данных пользователя
+loadUser: function() {
+    const savedUser = localStorage.getItem('cosmoshop_user');
+    if (savedUser) {
+        this.currentUser = JSON.parse(savedUser);
+        console.log('User loaded:', this.currentUser);
+    }
+},
+
+// Обновление интерфейса авторизации
+updateAuthUI: function() {
+    const authLinks = document.querySelectorAll('.nav a[href="login.html"]');
+    
+    authLinks.forEach(link => {
+        if (this.currentUser) {
+            // Пользователь авторизован - показываем имя
+            link.innerHTML = `
+                <span style="display: flex; align-items: center; gap: 5px;">
+                    👤 ${this.currentUser.name}
+                </span>
+            `;
+            link.href = 'javascript:void(0)';
+            link.style.cursor = 'pointer';
+            link.onclick = () => this.logout();
+        } else {
+            // Пользователь не авторизован - стандартная ссылка "Войти"
+            link.innerHTML = 'Войти';
+            link.href = 'login.html';
+            link.onclick = null;
+            link.style.cursor = 'pointer';
         }
-    },
+    });
+},
+
+// Выход пользователя
+logout: function() {
+    if (confirm('Вы уверены, что хотите выйти?')) {
+        this.currentUser = null;
+        localStorage.removeItem('cosmoshop_user');
+        this.showNotification('Вы вышли из системы');
+        this.updateAuthUI();
+        
+        // Обновляем страницу, чтобы применить изменения
+        setTimeout(() => {
+            window.location.reload();
+        }, 500);
+    }
+},
+
+// Вход пользователя
+login: function(event) {
+    if (event) event.preventDefault();
+    
+    const email = document.getElementById('email')?.value;
+    const password = document.getElementById('password')?.value;
+    
+    if (!email || !password) {
+        this.showNotification('Заполните все поля');
+        return;
+    }
+    
+    // Проверяем существование пользователя
+    const users = JSON.parse(localStorage.getItem('cosmoshop_users') || '[]');
+    const userExists = users.find(user => user.email === email);
+    
+    if (!userExists) {
+        this.showNotification('Пользователь не найден', 'error');
+        return;
+    }
+    
+    this.currentUser = { 
+        email: email, 
+        name: userExists.name || email.split('@')[0],
+        loginTime: new Date().toISOString()
+    };
+    
+    this.saveUser();
+    this.updateAuthUI();
+    this.showNotification(`Добро пожаловать, ${this.currentUser.name}!`);
+    
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 1000);
+},
+
+// Инициализация
+init: function() {
+    console.log('🚀 CosmoShop initialized');
+    
+    this.loadCart();
+    this.loadUser();
+    this.setupEventListeners();
+    this.updateCartCounter();
+    this.updateAuthUI(); // Важно: обновляем UI авторизации
+    
+    this.detectPageAndLoadContent();
+},
 
     // Сохранение корзины в LocalStorage
     saveCart: function() {
