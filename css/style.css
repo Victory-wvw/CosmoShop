@@ -699,3 +699,27 @@ body {
         font-size: 0.7rem;
     }
 }
+
+/* Фикс размеров изображений */
+.product-image {
+    height: 250px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+}
+
+.product-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+}
+
+.product-gallery .main-image {
+    height: 400px !important;
+}
+
+.product-gallery .main-image img {
+    object-fit: contain !important;
+}
