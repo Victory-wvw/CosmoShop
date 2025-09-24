@@ -1,6 +1,4 @@
-// Основной объект приложения
 const CosmoShop = {
-    // Данные товаров
     products: [
         {
             id: 1,
@@ -8,8 +6,8 @@ const CosmoShop = {
             brand: 'L\'Oreal',
             price: 1200,
             category: 'decorative',
-            image: 'images/product1.jpg',
-            description: 'Матовое помада с насыщенным цветом и длительным сроком носки.'
+            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Помада',
+            description: 'Матовое помада с насыщенным цветом и длительным сроком носки. Не сушит губы, обеспечивает комфортное нанесение. Идеально подходит для ежедневного использования.'
         },
         {
             id: 2,
@@ -17,53 +15,141 @@ const CosmoShop = {
             brand: 'Maybelline',
             price: 890,
             category: 'decorative',
-            image: 'images/product2.jpg',
-            description: 'Тушь для создания объема и длины ресниц.'
+            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Тушь',
+            description: 'Тушь для создания объема и длины ресниц. Специальная щеточка предотвращает образование комочков. Гипоаллергенная формула подходит для чувствительных глаз.'
         },
-        // Добавьте еще товаров...
+        {
+            id: 3,
+            name: 'Увлажняющий крем для лица',
+            brand: 'Nivea',
+            price: 1500,
+            category: 'skincare',
+            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Крем',
+            description: 'Ежедневный уход за кожей. Глубоко увлажняет и питает кожу, восстанавливает защитный барьер. Подходит для всех типов кожи, включая чувствительную.'
+        },
+        {
+            id: 4,
+            name: 'Парфюмированная вода "Chanel №5"',
+            brand: 'Chanel',
+            price: 4500,
+            category: 'perfume',
+            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Духи',
+            description: 'Утонченный аромат с нотками жасмина, розы и ванили. Стойкость до 8 часов. Классический французский парфюм для особых occasions.'
+        },
+        {
+            id: 5,
+            name: 'Шампунь для объема волос',
+            brand: 'L\'Oreal',
+            price: 750,
+            category: 'haircare',
+            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Шампунь',
+            description: 'Шампунь для придания объема тонким волосам. Обогащен протеинами и витаминами, укрепляет волосы по всей длине.'
+        },
+        {
+            id: 6,
+            name: 'Тональный крем',
+            brand: 'Maybelline',
+            price: 1300,
+            category: 'decorative',
+            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Тональный',
+            description: 'Легкий тональный крем с естественным покрытием. Не забивает поры, подстраивается под тон кожи. SPF 15 защита.'
+        }
     ],
 
-    // Корзина
     cart: [],
-
-    // Текущий пользователь
     currentUser: null,
+    currentQuantity: 1,
 
-    // Инициализация приложения
     init: function() {
         this.loadCart();
         this.setupEventListeners();
-        this.loadExchangeRate(); // Загрузка курса валют
-        this.renderProducts();
-    },
-
-    // Работа с API курса валют
-    async loadExchangeRate() {
-        try {
-            const response = await fetch('https://api.exchangerate-api.com/v4/latest/RUB');
-            const data = await response.json();
-            const usdRate = data.rates.USD;
-            
-            // Добавляем отображение цены в долларах
-            document.querySelectorAll('.price').forEach(priceElement => {
-                const rubPrice = parseInt(priceElement.textContent);
-                if (!isNaN(rubPrice)) {
-                    const usdPrice = (rubPrice * usdRate).toFixed(2);
-                    priceElement.innerHTML += ` <small>($${usdPrice})</small>`;
-                }
-            });
-        } catch (error) {
-            console.log('Не удалось загрузить курс валют');
+        this.updateCartCounter();
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        
+        if (productId && window.location.pathname.includes('product-card.html')) {
+            this.loadProductData(parseInt(productId));
+        } else if (window.location.pathname.includes('catalog.html')) {
+            this.renderProducts();
+        } else if (window.location.pathname.includes('index.html')) {
+            this.renderFeaturedProducts();
+        } else if (window.location.pathname.includes('cart.html')) {
+            this.renderCart();
         }
     },
 
-    // Рендер товаров в каталоге
-    renderProducts: function() {
-        const productsGrid = document.querySelector('.products-grid');
-        if (!productsGrid) return;
+    loadProductData: function(productId) {
+        const product = this.products.find(p => p.id === productId);
+        if (product) {
+            this.renderProductDetail(product);
+        } else {
+            document.getElementById('productDetail').innerHTML = 
+                '<div class="loading">Товар не найден</div>';
+        }
+    },
 
-        productsGrid.innerHTML = this.products.map(product => `
-            <div class="product-item" data-id="${product.id}">
+    renderProductDetail: function(product) {
+        const productDetail = document.getElementById('productDetail');
+        productDetail.innerHTML = `
+            <div class="product-gallery">
+                <div class="main-image">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+            </div>
+
+            <div class="product-info-detail">
+                <h2>${product.name}</h2>
+                <p class="product-brand">${product.brand}</p>
+                <p class="price">${product.price} руб.</p>
+                
+                <div class="product-options">
+                    <div class="option">
+                        <label>Цвет:</label>
+                        <select id="colorSelect">
+                            <option>Красный</option>
+                            <option>Розовый</option>
+                            <option>Нюд</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="product-actions">
+                    <div class="quantity">
+                        <button type="button" class="qty-btn" onclick="CosmoShop.changeQuantity(-1)">-</button>
+                        <span class="qty-value">${this.currentQuantity}</span>
+                        <button type="button" class="qty-btn" onclick="CosmoShop.changeQuantity(1)">+</button>
+                    </div>
+                    <button class="btn-add-to-cart" onclick="CosmoShop.addToCart(${product.id})">
+                        Добавить в корзину
+                    </button>
+                </div>
+
+                <div class="product-description">
+                    <h3>Описание</h3>
+                    <p>${product.description}</p>
+                </div>
+            </div>
+        `;
+    },
+
+    changeQuantity: function(change) {
+        this.currentQuantity += change;
+        if (this.currentQuantity < 1) this.currentQuantity = 1;
+        const qtyElement = document.querySelector('.qty-value');
+        if (qtyElement) {
+            qtyElement.textContent = this.currentQuantity;
+        }
+    },
+
+    renderFeaturedProducts: function() {
+        const featuredGrid = document.getElementById('featuredProducts');
+        if (!featuredGrid) return;
+
+        const featuredProducts = this.products.slice(0, 4);
+        
+        featuredGrid.innerHTML = featuredProducts.map(product => `
+            <div class="product-item" onclick="window.location.href='product-card.html?id=${product.id}'">
                 <div class="product-image">
                     <img src="${product.image}" alt="${product.name}">
                 </div>
@@ -71,7 +157,7 @@ const CosmoShop = {
                     <h4>${product.name}</h4>
                     <p class="brand">${product.brand}</p>
                     <p class="price">${product.price} руб.</p>
-                    <button class="btn-add" onclick="CosmoShop.addToCart(${product.id})">
+                    <button class="btn-add" onclick="event.stopPropagation(); CosmoShop.addToCart(${product.id})">
                         В корзину
                     </button>
                 </div>
@@ -79,29 +165,58 @@ const CosmoShop = {
         `).join('');
     },
 
-    // Работа с корзиной
+    renderProducts: function() {
+        const productsGrid = document.getElementById('productsGrid');
+        if (!productsGrid) return;
+
+        productsGrid.innerHTML = this.products.map(product => `
+            <div class="product-item" onclick="window.location.href='product-card.html?id=${product.id}'">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                <div class="product-info">
+                    <h4>${product.name}</h4>
+                    <p class="brand">${product.brand}</p>
+                    <p class="price">${product.price} руб.</p>
+                    <button class="btn-add" onclick="event.stopPropagation(); CosmoShop.addToCart(${product.id})">
+                        В корзину
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    },
+
     addToCart: function(productId) {
         const product = this.products.find(p => p.id === productId);
         const existingItem = this.cart.find(item => item.id === productId);
         
         if (existingItem) {
-            existingItem.quantity++;
+            existingItem.quantity += this.currentQuantity;
         } else {
-            this.cart.push({...product, quantity: 1});
+            this.cart.push({
+                ...product,
+                quantity: this.currentQuantity
+            });
         }
         
+        this.currentQuantity = 1;
         this.saveCart();
         this.updateCartCounter();
         this.showNotification('Товар добавлен в корзину!');
+        
+        if (window.location.pathname.includes('cart.html')) {
+            this.renderCart();
+        }
     },
 
     removeFromCart: function(productId) {
         this.cart = this.cart.filter(item => item.id !== productId);
         this.saveCart();
         this.renderCart();
+        this.updateCartCounter();
     },
 
-    updateQuantity: function(productId, change) {
+    updateCartQuantity: function(productId, change) {
         const item = this.cart.find(item => item.id === productId);
         if (item) {
             item.quantity += change;
@@ -114,12 +229,22 @@ const CosmoShop = {
         }
     },
 
-    // Рендер корзины
     renderCart: function() {
-        const cartItems = document.querySelector('.cart-items');
-        const cartSummary = document.querySelector('.cart-summary');
+        const cartItems = document.getElementById('cartItems');
+        const cartSummary = document.getElementById('cartSummary');
+        const emptyCart = document.getElementById('emptyCart');
         
         if (!cartItems) return;
+
+        if (this.cart.length === 0) {
+            emptyCart.style.display = 'block';
+            cartSummary.style.display = 'none';
+            cartItems.innerHTML = '<div class="empty-cart"><p>Ваша корзина пуста</p><a href="catalog.html" class="btn">Перейти к покупкам</a></div>';
+            return;
+        }
+
+        emptyCart.style.display = 'none';
+        cartSummary.style.display = 'block';
 
         cartItems.innerHTML = this.cart.map(item => `
             <div class="cart-item">
@@ -132,137 +257,134 @@ const CosmoShop = {
                 </div>
                 <div class="item-price">${item.price} руб.</div>
                 <div class="item-quantity">
-                    <button class="qty-btn" onclick="CosmoShop.updateQuantity(${item.id}, -1)">-</button>
+                    <button class="qty-btn" onclick="CosmoShop.updateCartQuantity(${item.id}, -1)">-</button>
                     <span class="qty-value">${item.quantity}</span>
-                    <button class="qty-btn" onclick="CosmoShop.updateQuantity(${item.id}, 1)">+</button>
+                    <button class="qty-btn" onclick="CosmoShop.updateCartQuantity(${item.id}, 1)">+</button>
                 </div>
                 <div class="item-total">${item.price * item.quantity} руб.</div>
                 <button class="btn-remove" onclick="CosmoShop.removeFromCart(${item.id})">×</button>
             </div>
         `).join('');
 
-        const total = this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        if (cartSummary) {
-            cartSummary.innerHTML = `
-                <h3>Итого</h3>
-                <div class="summary-row">
-                    <span>Товары (${this.cart.reduce((sum, item) => sum + item.quantity, 0)}):</span>
-                    <span>${total} руб.</span>
-                </div>
-                <div class="summary-row">
-                    <span>Доставка:</span>
-                    <span>${total > 2000 ? 'Бесплатно' : '300 руб.'}</span>
-                </div>
-                <div class="summary-row total">
-                    <span>Всего:</span>
-                    <span>${total + (total > 2000 ? 0 : 300)} руб.</span>
-                </div>
-                <button class="btn-checkout" onclick="CosmoShop.checkout()">Оформить заказ</button>
-            `;
+        const itemsTotal = this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const deliveryCost = itemsTotal > 2000 ? 0 : 300;
+        const totalAmount = itemsTotal + deliveryCost;
+
+        document.getElementById('itemsTotal').textContent = `${itemsTotal} руб.`;
+        document.getElementById('deliveryCost').textContent = deliveryCost === 0 ? 'Бесплатно' : `${deliveryCost} руб.`;
+        document.getElementById('totalAmount').textContent = `${totalAmount} руб.`;
+    },
+
+    setupEventListeners: function() {
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => this.searchProducts(e.target.value));
         }
     },
 
-    // Система авторизации
-    setupAuth: function() {
-        const loginForm = document.getElementById('loginForm');
-        const registerForm = document.getElementById('registerForm');
-        const showRegister = document.getElementById('showRegister');
-        const showLogin = document.getElementById('showLogin');
-
-        if (showRegister) {
-            showRegister.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.querySelector('.auth-form').style.display = 'none';
-                document.querySelector('.register-form').style.display = 'block';
-            });
-        }
-
-        if (showLogin) {
-            showLogin.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.querySelector('.auth-form').style.display = 'block';
-                document.querySelector('.register-form').style.display = 'none';
-            });
-        }
-
-        if (loginForm) {
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.login();
-            });
-        }
-
-        if (registerForm) {
-            registerForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.register();
-            });
+    searchProducts: function(query) {
+        const filteredProducts = this.products.filter(product =>
+            product.name.toLowerCase().includes(query.toLowerCase()) ||
+            product.brand.toLowerCase().includes(query.toLowerCase())
+        );
+        
+        const productsGrid = document.getElementById('productsGrid');
+        if (productsGrid) {
+            productsGrid.innerHTML = filteredProducts.map(product => `
+                <div class="product-item" onclick="window.location.href='product-card.html?id=${product.id}'">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h4>${product.name}</h4>
+                        <p class="brand">${product.brand}</p>
+                        <p class="price">${product.price} руб.</p>
+                        <button class="btn-add" onclick="event.stopPropagation(); CosmoShop.addToCart(${product.id})">
+                            В корзину
+                        </button>
+                    </div>
+                </div>
+            `).join('');
         }
     },
 
-    login: function() {
+    applyFilters: function() {
+        const categoryFilters = Array.from(document.querySelectorAll('input[value="decorative"], input[value="skincare"], input[value="perfume"], input[value="haircare"]:checked'))
+            .map(input => input.value);
+        
+        const brandFilters = Array.from(document.querySelectorAll('input[value="L\'Oreal"], input[value="Maybelline"], input[value="Nivea"], input[value="Chanel"]:checked'))
+            .map(input => input.value);
+
+        const minPrice = parseInt(document.getElementById('minPrice').value) || 0;
+        const maxPrice = parseInt(document.getElementById('maxPrice').value) || Infinity;
+
+        const filteredProducts = this.products.filter(product => {
+            const categoryMatch = categoryFilters.length === 0 || categoryFilters.includes(product.category);
+            const brandMatch = brandFilters.length === 0 || brandFilters.includes(product.brand);
+            const priceMatch = product.price >= minPrice && product.price <= maxPrice;
+            
+            return categoryMatch && brandMatch && priceMatch;
+        });
+
+        const productsGrid = document.getElementById('productsGrid');
+        if (productsGrid) {
+            productsGrid.innerHTML = filteredProducts.map(product => `
+                <div class="product-item" onclick="window.location.href='product-card.html?id=${product.id}'">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h4>${product.name}</h4>
+                        <p class="brand">${product.brand}</p>
+                        <p class="price">${product.price} руб.</p>
+                        <button class="btn-add" onclick="event.stopPropagation(); CosmoShop.addToCart(${product.id})">
+                            В корзину
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+    },
+
+    showRegisterForm: function() {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
+    },
+
+    showLoginForm: function() {
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('loginForm').style.display = 'block';
+    },
+
+    login: function(event) {
+        event.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         
-        // Простая имитация авторизации
         this.currentUser = { email, name: email.split('@')[0] };
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         this.showNotification('Вы успешно вошли!');
         setTimeout(() => window.location.href = 'index.html', 1000);
     },
 
-    register: function() {
+    register: function(event) {
+        event.preventDefault();
         const name = document.getElementById('reg-name').value;
         const email = document.getElementById('reg-email').value;
         const password = document.getElementById('reg-password').value;
+        const confirm = document.getElementById('reg-confirm').value;
+        
+        if (password !== confirm) {
+            this.showNotification('Пароли не совпадают!');
+            return;
+        }
         
         const users = JSON.parse(localStorage.getItem('users') || '[]');
         users.push({ name, email, password });
         localStorage.setItem('users', JSON.stringify(users));
         
         this.showNotification('Регистрация успешна!');
-        document.querySelector('.register-form').style.display = 'none';
-        document.querySelector('.auth-form').style.display = 'block';
-    },
-
-    // Вспомогательные функции
-    saveCart: function() {
-        localStorage.setItem('cart', JSON.stringify(this.cart));
-    },
-
-    loadCart: function() {
-        const savedCart = localStorage.getItem('cart');
-        if (savedCart) {
-            this.cart = JSON.parse(savedCart);
-        }
-    },
-
-    updateCartCounter: function() {
-        const counter = document.querySelector('.cart-counter');
-        const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
-        
-        if (counter) {
-            counter.textContent = totalItems;
-        }
-    },
-
-    showNotification: function(message) {
-        const notification = document.createElement('div');
-        notification.className = 'notification';
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #D4AF37;
-            color: white;
-            padding: 1rem;
-            border-radius: 5px;
-            z-index: 1000;
-        `;
-        
-        document.body.appendChild(notification);
-        setTimeout(() => notification.remove(), 3000);
+        this.showLoginForm();
     },
 
     checkout: function() {
@@ -281,39 +403,44 @@ const CosmoShop = {
         this.cart = [];
         this.saveCart();
         this.renderCart();
+        this.updateCartCounter();
     },
 
-    // Настройка обработчиков событий
-    setupEventListeners: function() {
-        // Фильтрация в каталоге
-        const filterInputs = document.querySelectorAll('.filters input');
-        filterInputs.forEach(input => {
-            input.addEventListener('change', () => this.applyFilters());
-        });
+    saveCart: function() {
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+    },
 
-        // Поиск товаров
-        const searchInput = document.querySelector('.search-input');
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => this.searchProducts(e.target.value));
+    loadCart: function() {
+        const savedCart = localStorage.getItem('cart');
+        if (savedCart) {
+            this.cart = JSON.parse(savedCart);
         }
-
-        this.setupAuth();
+        
+        const savedUser = localStorage.getItem('currentUser');
+        if (savedUser) {
+            this.currentUser = JSON.parse(savedUser);
+        }
     },
 
-    applyFilters: function() {
-        // Логика фильтрации товаров
-        console.log('Применение фильтров...');
+    updateCartCounter: function() {
+        const counter = document.querySelector('.cart-counter');
+        const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+        
+        if (counter) {
+            counter.textContent = totalItems;
+        }
     },
 
-    searchProducts: function(query) {
-        // Логика поиска товаров
-        console.log('Поиск:', query);
+    showNotification: function(message) {
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 3000);
     }
 };
 
-// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
     CosmoShop.init();
-    CosmoShop.renderCart();
-    CosmoShop.updateCartCounter();
 });
