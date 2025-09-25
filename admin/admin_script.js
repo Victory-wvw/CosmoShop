@@ -72,9 +72,8 @@ class AdminPanel {
                 category_id: 1,
                 description: "Матовое помада с насыщенным цветом и длительным сроком носки.",
                 stock_quantity: 15,
-                sku: "CM001",
                 status: "active",
-                image: "../image/product1.jpg",
+                image: "../images/product1.jpg",
                 created: "2024-01-10T10:00:00Z"
             },
             {
@@ -85,9 +84,8 @@ class AdminPanel {
                 category_id: 1,
                 description: "Тушь для создания объема и длины ресниц.",
                 stock_quantity: 22,
-                sku: "CM002",
                 status: "active",
-                image: "../image/product2.jpg",
+                image: "../images/product2.jpg",
                 created: "2024-01-10T10:00:00Z"
             }
         ];
@@ -327,10 +325,6 @@ class AdminPanel {
                     <img src="${this.getProductImageUrl(product.image)}" alt="${product.name}" 
                          class="product-thumb" onerror="this.src='https://via.placeholder.com/50x50/FFE8E8/333?text=IMG'">
                 </td>
-                <td>
-                    <strong>${product.name}</strong><br>
-                    <small>Артикул: ${product.sku}</small>
-                </td>
                 <td>${product.brand}</td>
                 <td><strong>${product.price} руб.</strong></td>
                 <td>${this.getCategoryName(product.category_id)}</td>
@@ -544,7 +538,6 @@ class AdminPanel {
         document.getElementById('productCategory').value = product.category_id;
         document.getElementById('productDescription').value = product.description || '';
         document.getElementById('productStock').value = product.stock_quantity;
-        document.getElementById('productSku').value = product.sku || '';
 
         if (product.image) {
             document.getElementById('imagePreview').innerHTML = `
@@ -566,7 +559,6 @@ class AdminPanel {
             category_id: parseInt(formData.get('category_id')),
             description: formData.get('description'),
             stock_quantity: parseInt(formData.get('stock_quantity')) || 0,
-            sku: formData.get('sku') || `CM${Date.now().toString().slice(-3)}`,
             status: 'active',
             image: this.uploadedImageName || this.currentProduct?.image || 'default.jpg',
             created: this.currentProduct ? this.currentProduct.created : new Date().toISOString()
