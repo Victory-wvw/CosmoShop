@@ -15,7 +15,6 @@
                 <a href="#orders" class="nav-link active">📦 Заказы</a>
                 <a href="#products" class="nav-link">🛍️ Товары</a>
                 <a href="#users" class="nav-link">👥 Пользователи</a>
-                <a href="#categories" class="nav-link">📂 Категории</a>
                 <a href="../index.html" class="nav-link site-link">← На сайт</a>
             </nav>
         </header>
@@ -159,43 +158,6 @@
                 </div>
             </section>
 
-            <!-- Категории -->
-            <section id="categories" class="admin-section">
-                <div class="section-header">
-                    <h2>📂 Управление категориями</h2>
-                    <div class="section-actions">
-                        <div class="search-box">
-                            <input type="text" id="searchCategories" placeholder="Поиск по названию..." class="search-input">
-                        </div>
-                        <button class="btn btn-primary" onclick="showCategoryForm()">
-                            + Добавить категорию
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="table-container">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Название</th>
-                                <th>URL-slug</th>
-                                <th>Кол-во товаров</th>
-                                <th>Статус</th>
-                                <th>Дата создания</th>
-                                <th>Действия</th>
-                            </tr>
-                        </thead>
-                        <tbody id="categoriesTable">
-                            <tr>
-                                <td colspan="7" class="loading-text">Загрузка категорий...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </main>
-    </div>
 
     <!-- Модальное окно для товаров -->
     <div id="productModal" class="modal">
@@ -238,10 +200,6 @@
                     <div class="form-group">
                         <label for="productStock">Количество на складе</label>
                         <input type="number" id="productStock" name="stock_quantity" value="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="productSku">Артикул</label>
-                        <input type="text" id="productSku" name="sku" placeholder="CM001">
                     </div>
                 </div>
                 
@@ -308,54 +266,6 @@
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">Сохранить пользователя</button>
                     <button type="button" class="btn btn-secondary" onclick="closeModal('userModal')">Отмена</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Модальное окно для категорий -->
-    <div id="categoryModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="categoryModalTitle">Добавить категорию</h3>
-                <span class="close" onclick="closeModal('categoryModal')">&times;</span>
-            </div>
-            <form id="categoryForm" class="modal-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="categoryName">Название категории *</label>
-                        <input type="text" id="categoryName" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="categorySlug">URL-slug *</label>
-                        <input type="text" id="categorySlug" name="slug" required>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="categoryDescription">Описание</label>
-                    <textarea id="categoryDescription" name="description" rows="3"></textarea>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="categoryParent">Родительская категория</label>
-                        <select id="categoryParent" name="parent_id">
-                            <option value="">Нет (основная категория)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="categoryStatus">Статус</label>
-                        <select id="categoryStatus" name="status">
-                            <option value="active">Активна</option>
-                            <option value="inactive">Неактивна</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Сохранить категорию</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('categoryModal')">Отмена</button>
                 </div>
             </form>
         </div>
