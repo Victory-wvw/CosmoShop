@@ -32,7 +32,7 @@ app.get('/api/products', (req, res) => {
             brand: 'Maybelline',
             price: 890,
             category: 'decorative',
-            image: '../images/product1.jpg',
+            image: '../images/product2.jpg',
             description: 'Тушь для создания объема и длины ресниц.'
         }
     ];
