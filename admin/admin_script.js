@@ -551,7 +551,7 @@ class AdminPanel {
 
     // === ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ===
     getProductImageUrl(imageName) {
-        if (!imageName) return 'https://via.placeholder.com/300x300/FFE8E8/333?text=Нет+изображения';
+        if (!imageName) return `../images/default.jpg`;
         
         const images = JSON.parse(localStorage.getItem('product_images') || '{}');
         return images[imageName] || `images/products/${imageName}`;
