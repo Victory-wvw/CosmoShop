@@ -76,6 +76,7 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Заголовок секции */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -91,50 +92,45 @@
     font-size: 1.8rem;
 }
 
-/* Статистические карточки */
-.stats-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+.section-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.stat-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 2rem;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+/* Поиск и фильтры */
+.search-box {
+    position: relative;
 }
 
-.stat-card:hover {
-    transform: translateY(-5px);
-}
-
-.stat-card:nth-child(2) {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.stat-card:nth-child(3) {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.stat-card:nth-child(4) {
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-}
-
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.stat-label {
+.search-input {
+    width: 300px;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     font-size: 1rem;
-    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #D4AF37;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.filters {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.filter-select {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    font-size: 0.9rem;
 }
 
 /* Таблицы */
@@ -142,12 +138,14 @@
     overflow-x: auto;
     border-radius: 10px;
     border: 1px solid #e1e5e9;
+    margin-bottom: 1.5rem;
 }
 
 .admin-table {
     width: 100%;
     border-collapse: collapse;
     background: white;
+    font-size: 0.9rem;
 }
 
 .admin-table th {
@@ -157,15 +155,15 @@
     font-weight: 600;
     color: #2c3e50;
     border-bottom: 2px solid #e1e5e9;
-    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    position: relative;
 }
 
 .admin-table td {
-    padding: 1.2rem;
+    padding: 1rem;
     border-bottom: 1px solid #e1e5e9;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .admin-table tr:hover {
@@ -174,6 +172,13 @@
 
 .admin-table tr:last-child td {
     border-bottom: none;
+}
+
+.loading-text {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 2rem !important;
 }
 
 /* Элементы таблицы */
@@ -185,19 +190,77 @@
     border: 2px solid #e1e5e9;
 }
 
-.status-select {
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background: white;
-    font-size: 0.9rem;
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e1e5e9;
 }
 
-.status-pending { color: #f39c12; font-weight: 600; }
-.status-confirmed { color: #3498db; font-weight: 600; }
-.status-shipped { color: #9b59b6; font-weight: 600; }
-.status-delivered { color: #27ae60; font-weight: 600; }
-.status-active { color: #27ae60; font-weight: 600; }
+/* Статусы */
+.status-pending { 
+    background: #fff3cd; 
+    color: #856404; 
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-confirmed { 
+    background: #d1ecf1; 
+    color: #0c5460; 
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-shipped { 
+    background: #e2e3e5; 
+    color: #383d41; 
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-delivered { 
+    background: #d4edda; 
+    color: #155724; 
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-cancelled { 
+    background: #f8d7da; 
+    color: #721c24; 
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-active { 
+    background: #d4edda; 
+    color: #155724; 
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-inactive { 
+    background: #f8d7da; 
+    color: #721c24; 
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
 
 /* Кнопки */
 .btn {
@@ -212,12 +275,12 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    font-weight: 500;
 }
 
 .btn-primary {
     background: #D4AF37;
     color: white;
-    font-weight: 600;
 }
 
 .btn-primary:hover {
@@ -238,19 +301,46 @@
 .btn-edit {
     background: #3498db;
     color: white;
-    padding: 0.5rem 0.8rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
 }
 
 .btn-delete {
     background: #e74c3c;
     color: white;
-    padding: 0.5rem 0.8rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
 }
 
 .btn-view {
     background: #9b59b6;
     color: white;
-    padding: 0.5rem 0.8rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+.btn-export {
+    background: #27ae60;
+    color: white;
+}
+
+.btn-export:hover {
+    background: #219653;
+}
+
+.btn-pagination {
+    background: #ecf0f1;
+    color: #2c3e50;
+    padding: 0.5rem 1rem;
+}
+
+.btn-pagination:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-pagination:hover:not(:disabled) {
+    background: #bdc3c7;
 }
 
 .btn:hover {
@@ -258,28 +348,36 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-/* Поиск */
-.search-box {
-    margin-bottom: 1.5rem;
+/* Кнопки сортировки */
+.sort-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
 }
 
-.search-input {
-    width: 100%;
-    max-width: 400px;
-    padding: 0.8rem 1.2rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
+.sort-btn:hover {
+    opacity: 1;
 }
 
-.search-input:focus {
-    outline: none;
-    border-color: #D4AF37;
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
 }
 
-/* Модальное окно */
+.page-info {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Модальные окна */
 .modal {
     display: none;
     position: fixed;
@@ -294,13 +392,19 @@
 
 .modal-content {
     background: white;
-    margin: 5% auto;
+    margin: 2% auto;
     padding: 0;
     border-radius: 15px;
     width: 90%;
     max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     animation: slideIn 0.3s ease;
+}
+
+.modal-content.large {
+    max-width: 800px;
 }
 
 @keyframes slideIn {
@@ -314,6 +418,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
 }
 
 .modal-header h3 {
@@ -326,6 +434,7 @@
     cursor: pointer;
     color: #95a5a6;
     transition: color 0.3s ease;
+    line-height: 1;
 }
 
 .close:hover {
@@ -333,6 +442,10 @@
 }
 
 .modal-form {
+    padding: 2rem;
+}
+
+.modal-body {
     padding: 2rem;
 }
 
@@ -352,6 +465,7 @@
     margin-bottom: 0.5rem;
     font-weight: 600;
     color: #2c3e50;
+    font-size: 0.9rem;
 }
 
 .form-group input,
@@ -362,6 +476,7 @@
     border-radius: 6px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    font-family: inherit;
 }
 
 .form-group input:focus,
@@ -381,6 +496,81 @@
     border-top: 1px solid #e1e5e9;
 }
 
+/* Загрузка изображений */
+.image-preview-container {
+    margin: 1rem 0;
+}
+
+.image-preview {
+    position: relative;
+    display: inline-block;
+    margin: 0.5rem 0;
+}
+
+.image-preview img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #e1e5e9;
+}
+
+.image-preview button {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="file"] {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    width: 100%;
+}
+
+/* Детали заказа */
+.order-details {
+    display: grid;
+    gap: 2rem;
+}
+
+.order-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.order-items {
+    margin-top: 1rem;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #e1e5e9;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
     .admin-container {
@@ -389,6 +579,10 @@
     
     .admin-header {
         padding: 1rem;
+    }
+    
+    .admin-header h1 {
+        font-size: 1.8rem;
     }
     
     .admin-nav {
@@ -400,8 +594,14 @@
         align-items: flex-start;
     }
     
-    .stats-cards {
-        grid-template-columns: 1fr;
+    .section-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .search-input {
+        width: 100%;
+        max-width: 200px;
     }
     
     .form-row {
@@ -413,16 +613,40 @@
     }
     
     .modal-content {
-        margin: 10% auto;
+        margin: 5% auto;
         width: 95%;
     }
     
     .admin-table {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
     
     .admin-table th,
     .admin-table td {
-        padding: 0.8rem;
+        padding: 0.8rem 0.5rem;
+    }
+    
+    .order-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-table {
+        font-size: 0.7rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .section-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-input {
+        max-width: none;
     }
 }
