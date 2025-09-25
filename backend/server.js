@@ -23,8 +23,8 @@ app.get('/api/products', (req, res) => {
             brand: 'L\'Oreal',
             price: 1200,
             category: 'decorative',
-            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Помада',
-            description: 'Матовое помада с насыщенным цветом и длительным сроком носки.'
+            image: '../images/product1.jpg',
+            description: 'Матовая помада с насыщенным цветом и длительным сроком носки.'
         },
         {
             id: 2,
@@ -32,7 +32,7 @@ app.get('/api/products', (req, res) => {
             brand: 'Maybelline',
             price: 890,
             category: 'decorative',
-            image: 'https://via.placeholder.com/300x300/FFE8E8/333?text=Тушь',
+            image: '../images/product1.jpg',
             description: 'Тушь для создания объема и длины ресниц.'
         }
     ];
