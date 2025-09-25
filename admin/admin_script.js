@@ -66,7 +66,7 @@ class AdminPanel {
         const sampleProducts = [
             {
                 id: 1,
-                name: "Матовое помада \"Velvet\"",
+                name: "Матовая помада \"Velvet\"",
                 brand: "L'Oreal",
                 price: 1200,
                 category_id: 1,
@@ -74,12 +74,12 @@ class AdminPanel {
                 stock_quantity: 15,
                 sku: "CM001",
                 status: "active",
-                image: "product1.jpg",
+                image: "../image/product1.jpg",
                 created: "2024-01-10T10:00:00Z"
             },
             {
                 id: 2,
-                name: "Объемная тушь для ресниц",
+                name: "Тушь для ресниц Веерный объём",
                 brand: "Maybelline",
                 price: 890,
                 category_id: 1,
@@ -87,7 +87,7 @@ class AdminPanel {
                 stock_quantity: 22,
                 sku: "CM002",
                 status: "active",
-                image: "product2.jpg",
+                image: "../image/product2.jpg",
                 created: "2024-01-10T10:00:00Z"
             }
         ];
