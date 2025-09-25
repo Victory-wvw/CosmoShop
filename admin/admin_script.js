@@ -21,7 +21,7 @@ class AdminPanel {
         this.setupNavigation();
         this.setupEventListeners();
         this.showSectionFromHash();
-        console.log('👑 Админ-панель инициализирована');
+        console.log(' Админ-панель инициализирована');
     }
 
     initializeData() {
@@ -115,31 +115,9 @@ class AdminPanel {
             }
         ];
 
-        const sampleCategories = [
-            {
-                id: 1,
-                name: "Декоративная косметика",
-                slug: "decorative",
-                description: "Помады, тушь, тени и другие средства макияжа",
-                product_count: 4,
-                status: "active",
-                created: "2024-01-10T08:00:00Z"
-            },
-            {
-                id: 2,
-                name: "Уход за кожей",
-                slug: "skincare",
-                description: "Кремы, сыворотки, средства для умывания",
-                product_count: 2,
-                status: "active",
-                created: "2024-01-10T08:00:00Z"
-            }
-        ];
-
         localStorage.setItem('admin_orders', JSON.stringify(sampleOrders));
         localStorage.setItem('admin_products', JSON.stringify(sampleProducts));
         localStorage.setItem('admin_users', JSON.stringify(sampleUsers));
-        localStorage.setItem('admin_categories', JSON.stringify(sampleCategories));
     }
 
     setupNavigation() {
@@ -191,9 +169,6 @@ class AdminPanel {
                 break;
             case 'users':
                 this.loadUsersData();
-                break;
-            case 'categories':
-                this.loadCategoriesData();
                 break;
         }
     }
@@ -373,10 +348,6 @@ class AdminPanel {
             <tr>
                 <td>${user.id}</td>
                 <td>
-                    <img src="https://via.placeholder.com/40x40/007bff/ffffff?text=${user.name.charAt(0)}" 
-                         class="user-avatar" alt="${user.name}">
-                </td>
-                <td>
                     <strong>${user.name}</strong><br>
                     <small>${user.address}</small>
                 </td>
@@ -467,7 +438,6 @@ class AdminPanel {
             case 'orders': this.renderOrdersTable(data); break;
             case 'products': this.renderProductsTable(data); break;
             case 'users': this.renderUsersTable(data); break;
-            case 'categories': this.renderCategoriesTable(data); break;
         }
     }
 
@@ -587,21 +557,6 @@ class AdminPanel {
         return images[imageName] || `images/products/${imageName}`;
     }
 
-    getCategoryName(categoryId) {
-        const categories = this.getCategories();
-        const category = categories.find(c => c.id === categoryId);
-        return category ? category.name : 'Неизвестно';
-    }
-
-    loadCategoriesForSelect() {
-        const select = document.getElementById('productCategory');
-        if (!select) return;
-
-        const categories = this.getCategories();
-        select.innerHTML = '<option value="">Выберите категорию</option>' +
-            categories.map(cat => `<option value="${cat.id}">${cat.name}</option>`).join('');
-    }
-
     getStatusColor(status) {
         const colors = {
             'pending': '#ffc107',
@@ -659,11 +614,6 @@ function showProductForm(product = null) {
 function showUserForm(user = null) {
     // Реализация формы пользователя
     alert('Форма пользователя будет реализована');
-}
-
-function showCategoryForm(category = null) {
-    // Реализация формы категории
-    alert('Форма категории будет реализована');
 }
 
 function closeModal(modalId) {
@@ -764,20 +714,6 @@ function viewUser(userId) {
 
 function editUser(userId) {
     alert(`Редактирование пользователя #${userId} будет реализовано`);
-}
-
-function editCategory(categoryId) {
-    alert(`Редактирование категории #${categoryId} будет реализовано`);
-}
-
-function deleteCategory(categoryId) {
-    if (confirm('Вы уверены, что хотите удалить эту категорию?')) {
-        const adminPanel = new AdminPanel();
-        const categories = adminPanel.getCategories().filter(c => c.id !== categoryId);
-        localStorage.setItem('admin_categories', JSON.stringify(categories));
-        adminPanel.showNotification('Категория удалена', 'success');
-        adminPanel.loadCategoriesData();
-    }
 }
 
 function sortTable(tableType, columnIndex) {
